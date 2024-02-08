@@ -1,5 +1,5 @@
-# building from base image
-FROM node
+# building from base image after colon is the node version
+FROM node:12
 
 # to overide the default working directory which helps in executing commands in the specified directory in this case /app
 # set the working directory before coping the files
