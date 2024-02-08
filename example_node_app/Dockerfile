@@ -5,15 +5,19 @@ FROM node
 # set the working directory before coping the files
 WORKDIR /app
 
+# copy the package.json to the working directory of the container
+COPY package.json /app
+
+# run command inside the container
+# by default all the commands will be executed in the working directory of the container
+# by default the working directory is the root folder of the container
+# the run command is placed before the copy commnad because we dont need to run the npm install every time we build the image unless there is a change in the package.json
+RUN npm install
+
 # copy all the files from the current directory of the Docker file and copy to the specified path of the container 
 # all files excluding the docker file will be copied
 # even though the working directory is set and everything works relative to it. It is best to specify the copy target location
 COPY . /app
-
-# run command inside the container
-# by default all the commands will be executed in the working directory of the container
-# by default the working directory is the root folder of the container 
-RUN npm install
 
 # docker has an internal network which is not exposed to outside
 # expose the port 80 of the docker container which helps outside world to communicate with it
