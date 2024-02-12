@@ -9,7 +9,9 @@ RUN npm install
 COPY . /app
 
 # to persist data volume command is used
-VOLUME [ "/app/feedback" ]
+# commnented since we are using named values
+# can also implemnt this command while using anonymous volumes
+# VOLUME [ "/app/feedback" ]
 
 EXPOSE 80
 
