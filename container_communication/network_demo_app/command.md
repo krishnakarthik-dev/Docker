@@ -17,3 +17,4 @@
 > no need for -p option for contaienrs like mongodb since they will only connecting between the containers and not between local machine and container.<br>
 > container to container connection does not require a port publishing.<br>
 > the docker does not replace the source to resolve the ip address. Instead when a request leaves a container the docker is aware of that and it resolves accordingly.<br>
+> to delete a docker network use docker network rm fav_net. <br>
