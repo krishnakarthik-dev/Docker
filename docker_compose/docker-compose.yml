@@ -1,0 +1,50 @@
+# to lock configurations
+version: "3.8"
+# indentation is must for childrens.
+# containers are the childrens of services
+services:
+  mongoDB:
+    image: "mongo"
+    volumes:
+      - data:/data/db
+    # environment:
+    #   - name=value
+    # env_file:
+    #   - fileName
+  backend:
+    build: ./backend
+      # path to the Dockerfile
+      # context: ./backend
+      # dockerfile: Dockerfile
+    ports:
+      - '80:80'
+    volumes:
+      # named volumes
+      - logs:/app/logs
+      # bind mount
+      - ./backend:/app
+      # anonymous volumes
+      - /app/node_modules
+    # dependency
+    depends_on:
+      - mongoDB
+  frontend:
+    build: ./frontend
+    ports:
+      -'3000:3000'
+    volumes:
+      # bind mount
+      - ./frontend/src:/app
+      # anonymous file
+      - /app/node_modules
+    # start in interactive mode (-it)
+    stdin_open: true
+    # attach terminal
+    tty: true
+    depends_on:
+      - backend
+#named volumes
+# do not specify anonymous and bind mounts
+volumes:
+  data:
+  logs:
